@@ -23,18 +23,22 @@ colnames(Ind)[c(6)] <- c("SiteCode")
 ### merge in an attempt to find as many matches as possible
 m = merge(w, Ind, by=c("Month","Year","SiteCode"), all.y = TRUE)
 
-### to only have complete datasets
-m = merge(w, Ind, by=c("Day","Month","Year","SiteCode"))
-
 ######3 remove duplicates according to multiple columns #####
 done = m[!duplicated(m[c("Sample")]),]
+
+### to only have complete datasets
+m = merge(w, Ind, by=c("Day","Month","Year","SiteCode"))
 
 ### remove soapstone becuase has FI value of 3.5
 done = done[c(-10),]
 colnames(done)
 
-calculate SUVA
-w$SUVA = w
+#calculate SUVA
+done$SUVA = (done$abs254/done$NPOC)*100
+done$DON = done$TDN - (done$Ammonia + done$Nitrate)
+
+### remov outliers  ###
+done$SUVA[done$SUVA > 3 ] <- "NA"
 
  #### use complete makes it so ignores NA
 cor(done$Ammonia, done$Nitrate, use = "complete")
