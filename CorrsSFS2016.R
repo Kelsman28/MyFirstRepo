@@ -151,7 +151,7 @@ wNut$DON[wNut$DON < 0 ] <- "NA"
 
 # wNut <- as.data.frame(sapply(wNut, as.numeric)) 
 wNut[, c(6:13)] <- sapply(wNut[, c(6:13)], as.numeric)
-logNut = wNut
+logwNut = wNut
 
 plot(wNut$Ammonia, wNut$NPOC)
 plot(wNut$Nitrate, wNut$NPOC)
@@ -166,3 +166,15 @@ plot(logwNut$Nitrate, logwNut$NPOC)
 plot(logwNut$Phosphorus, logwNut$NPOC)
 plot(logwNut$TDN, logwNut$NPOC)
 plot(logwNut$DON, logwNut$NPOC)
+
+sink("logcorrelations NutrientsNPOC.csv")
+
+cor.test(logwNut$Ammonia, logwNut$NPOC)
+cor.test(logwNut$Nitrate, logwNut$NPOC)
+cor.test(logwNut$Phosphorus, logwNut$NPOC)
+cor.test(logwNut$TDN, logwNut$NPOC)
+cor.test(logwNut$DON, logwNut$NPOC)
+
+sink()
+
+plot(done$NPOC, done$BIX)
