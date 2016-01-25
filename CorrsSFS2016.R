@@ -1,6 +1,7 @@
 library(tidyr)
 library(stats)
 library(reshape2)
+library(car)
 
 getwd()
 [1] "C:/Users/Julie Kelso/Dropbox/SFS/SFS 2016/SFSAbstract2016"
@@ -12,6 +13,12 @@ colnames(All)
 ### find a replace "Phospahte" and "Phosphate" with Phosphorus
 All$VariableCode = chartr("Phospahte", "Phosphorus", All$VariableCode)
 All$VariableCode = chartr("Phosphate", "Phosphorus", All$VariableCode)
+
+y1 <- recode(y, 'c("Perch", "Goby") = "Perciform" ; c("Trout", "Salmon") = "Salmonid"')
+y1
+
+All$VariableCode <- recode(All, 'c("Phospahte" ; "Phosphate") = "Phosphorus"')
+y1
 
 w = dcast(All, Day + Month + Year + SiteCode + Watershed  ~ VariableCode, value.var = "DataValue", fun.aggregate = mean)
 
