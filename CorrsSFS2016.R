@@ -26,6 +26,7 @@ m = merge(w, Ind, by=c("Month","Year","SiteCode"), all.y = TRUE)
 ######3 remove duplicates according to multiple columns #####
 done = m[!duplicated(m[c("Sample")]),]
 
+write.csv(done, "done.csv")
 ### to only have complete datasets
 #m = merge(w, Ind, by=c("Day","Month","Year","SiteCode"))
 
@@ -46,6 +47,8 @@ cor(done$Ammonia, done$Nitrate, use = "complete")
 cor(done$Ammonia, done$FI, use = "complete")
 cor(done$Nitrate, done$FI, use = "complete")
 
+dev.off()
+
 plot(done$Ammonia, done$FI)
 plot(done$Nitrate, done$FI)
 plot(done$Phosphorus, done$FI)
@@ -57,8 +60,24 @@ plot(done$DON, done$FI)
 plot(done$Ammonia, done$BIX)
 plot(done$Nitrate, done$BIX)
 plot(done$Phosphorus, done$BIX)
+plot(done$NPOC, done$BIX)
+plot(done$TDN, done$BIX)
+plot(done$SUVA, done$BIX)
+plot(done$DON, done$BIX)
 
 plot(done$Ammonia, done$HIX)
 plot(done$Nitrate, done$HIX)
 plot(done$Phosphorus, done$HIX)
+plot(done$NPOC, done$HIX)
+plot(done$TDN, done$HIX)
+plot(done$SUVA, done$HIX)
+plot(done$DON, done$HIX)
+
+plot(done$Ammonia, done$SUVA)
+plot(done$Nitrate, done$SUVA)
+plot(done$Phosphorus, done$SUVA)
+plot(done$NPOC, done$SUVA)
+plot(done$TDN, done$SUVA)
+plot(done$DON, done$SUVA)
+
 
