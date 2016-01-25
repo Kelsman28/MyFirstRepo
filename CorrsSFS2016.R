@@ -149,4 +149,14 @@ write.csv(wNut, "WideNutandDOM.csv")
 
 wNut$DON[wNut$DON < 0 ] <- "NA"
 
+# wNut <- as.data.frame(sapply(wNut, as.numeric)) 
+wNut[, c(6:13)] <- sapply(wNut[, c(6:13)], as.numeric)
+
+
+logDON = log(wNut$DON)
+logNPOC = log(wNut$NPOC)
+
 plot(wNut$DON, wNut$NPOC)
+plot(logDON, logNPOC)
+
+
