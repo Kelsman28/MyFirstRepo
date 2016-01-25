@@ -49,11 +49,18 @@ cor(done$Nitrate, done$FI, use = "complete")
 
 dev.off()
 
+plot(done$Ammonia, done$NPOC)
+plot(done$Nitrate, done$NPOC)
+done$Nitrate[done$Nitrate > 1.5 ] <- "NA"
+
+plot(done$Phosphorus, done$NPOC)
+
 plot(done$Ammonia, done$FI)
 plot(done$Nitrate, done$FI)
 plot(done$Phosphorus, done$FI)
 plot(done$NPOC, done$FI)
 
+### remove outlier that is 25 mg/l NPOC
 done$NPOC[done$NPOC > 20 ] <- "NA"
 
 plot(done$TDN, done$FI)
