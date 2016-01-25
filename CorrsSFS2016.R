@@ -34,6 +34,7 @@ colnames(done)
 
 #calculate SUVA
 done$SUVA = (done$abs254/done$NPOC)*100
+#calculate DON
 done$DON = done$TDN - (done$Ammonia + done$Nitrate)
 
 ### remov outliers  ###
@@ -61,7 +62,7 @@ cor.test(done$DON, done$NPOC, use = "complete")
 
 plot(done$TN, done$NPOC)
 plot(done$DON, done$NPOC)
-plot(done$DON, done$Ammonia)
+plot(done$DON, done$Ammonia
 
 plot(done$Ammonia, done$FI)
 plot(done$Nitrate, done$FI)
@@ -138,3 +139,10 @@ cor.test(done$DON, done$SUVA)
 
 sink()
 getwd()
+
+
+### All nutrients plus DOM and TDN
+wNut = dcast(All, Day + Month + Year + SiteCode + Watershed  ~ VariableCode, value.var = "DataValue", fun.aggregate = mean)
+
+
+
