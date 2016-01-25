@@ -27,10 +27,8 @@ m = merge(w, Ind, by=c("Month","Year","SiteCode"), all.y = TRUE)
 done = m[!duplicated(m[c("Sample")]),]
 
 ### to only have complete datasets
-m = merge(w, Ind, by=c("Day","Month","Year","SiteCode"))
+#m = merge(w, Ind, by=c("Day","Month","Year","SiteCode"))
 
-### remove soapstone becuase has FI value of 3.5
-done = done[c(-10),]
 colnames(done)
 
 #calculate SUVA
@@ -38,7 +36,10 @@ done$SUVA = (done$abs254/done$NPOC)*100
 done$DON = done$TDN - (done$Ammonia + done$Nitrate)
 
 ### remov outliers  ###
-done$SUVA[done$SUVA > 3 ] <- "NA"
+done$SUVA[done$SUVA > 9 ] <- "NA"
+done$FI[done$FI > 3 ] <- "NA"
+done$DON[done$DON < 0 ] <- "NA"
+done$TDN[done$TDN > 10 ] <- "NA"
 
  #### use complete makes it so ignores NA
 cor(done$Ammonia, done$Nitrate, use = "complete")
@@ -50,6 +51,8 @@ plot(done$Nitrate, done$FI)
 plot(done$Phosphorus, done$FI)
 plot(done$NPOC, done$FI)
 plot(done$TDN, done$FI)
+plot(done$SUVA, done$FI)
+plot(done$DON, done$FI)
 
 plot(done$Ammonia, done$BIX)
 plot(done$Nitrate, done$BIX)
