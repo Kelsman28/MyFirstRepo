@@ -53,6 +53,9 @@ plot(done$Ammonia, done$FI)
 plot(done$Nitrate, done$FI)
 plot(done$Phosphorus, done$FI)
 plot(done$NPOC, done$FI)
+
+done$NPOC[done$NPOC > 20 ] <- "NA"
+
 plot(done$TDN, done$FI)
 plot(done$SUVA, done$FI)
 plot(done$DON, done$FI)
@@ -80,4 +83,43 @@ plot(done$NPOC, done$SUVA)
 plot(done$TDN, done$SUVA)
 plot(done$DON, done$SUVA)
 
+######### Correlations  ####
 
+done <- as.data.frame(sapply(done, as.numeric)) 
+write.csv(done, "done.csv")
+
+sink("IndicesCorrelations.csv", append=FALSE, split=F)
+
+cor.test(done$Ammonia, done$FI, use = "complete")
+cor.test(done$Nitrate, done$FI,use = "complete")
+cor.test(done$Phosphorus, done$FI,use = "complete")
+cor.test(done$NPOC, done$FI,use = "complete")
+cor.test(done$TDN, done$FI,use = "complete")
+cor.test(done$SUVA, done$FI,use = "complete")
+cor.test(done$DON, done$FI,use = "complete")
+
+cor.test(done$Ammonia, done$BIX,use = "complete")
+cor.test(done$Nitrate, done$BIX,use = "complete")
+cor.test(done$Phosphorus, done$BIX,use = "complete")
+cor.test(done$NPOC, done$BIX,use = "complete")
+cor.test(done$TDN, done$BIX,use = "complete")
+cor.test(done$SUVA, done$BIX,use = "complete")
+cor.test(done$DON, done$BIX,use = "complete")
+
+cor.test(done$Ammonia, done$HIX,use = "complete")
+cor.test(done$Nitrate, done$HIX,use = "complete")
+cor.test(done$Phosphorus, done$HIX,use = "complete")
+cor.test(done$NPOC, done$HIX,use = "complete")
+cor.test(done$TDN, done$HIX,use = "complete")
+cor.test(done$SUVA, done$HIX,use = "complete")
+cor.test(done$DON, done$HIX,use = "complete")
+
+cor.test(done$Ammonia, done$SUVA)
+cor.test(done$Nitrate, done$SUVA)
+cor.test(done$Phosphorus, done$SUVA)
+cor.test(done$NPOC, done$SUVA)
+cor.test(done$TDN, done$SUVA)
+cor.test(done$DON, done$SUVA)
+
+sink()
+getwd()
