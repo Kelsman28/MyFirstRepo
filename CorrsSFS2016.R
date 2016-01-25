@@ -144,5 +144,9 @@ getwd()
 ### All nutrients plus DOM and TDN
 wNut = dcast(All, Day + Month + Year + SiteCode + Watershed  ~ VariableCode, value.var = "DataValue", fun.aggregate = mean)
 
+wNut$DON = wNut$TDN - (wNut$Ammonia + wNut$Nitrate)
+write.csv(wNut, "WideNutandDOM.csv")
 
+wNut$DON[wNut$DON < 0 ] <- "NA"
 
+plot(wNut$DON, wNut$NPOC)
