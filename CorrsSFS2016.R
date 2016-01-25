@@ -151,12 +151,18 @@ wNut$DON[wNut$DON < 0 ] <- "NA"
 
 # wNut <- as.data.frame(sapply(wNut, as.numeric)) 
 wNut[, c(6:13)] <- sapply(wNut[, c(6:13)], as.numeric)
+logNut = wNut
 
-
-logDON = log(wNut$DON)
-logNPOC = log(wNut$NPOC)
-
+plot(wNut$Ammonia, wNut$NPOC)
+plot(wNut$Nitrate, wNut$NPOC)
+plot(wNut$Phosphorus, wNut$NPOC)
+plot(wNut$TDN, wNut$NPOC)
 plot(wNut$DON, wNut$NPOC)
-plot(logDON, logNPOC)
 
+logwNut[, c(6:13)] <- sapply(logwNut[, c(6:13)], log)
 
+plot(logwNut$Ammonia, logwNut$NPOC)
+plot(logwNut$Nitrate, logwNut$NPOC)
+plot(logwNut$Phosphorus, logwNut$NPOC)
+plot(logwNut$TDN, logwNut$NPOC)
+plot(logwNut$DON, logwNut$NPOC)
