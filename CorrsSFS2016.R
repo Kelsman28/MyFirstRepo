@@ -32,6 +32,10 @@ done = m[!duplicated(m[c("Sample")]),]
 ### remove soapstone becuase has FI value of 3.5
 done = done[c(-10),]
 colnames(done)
+
+calculate SUVA
+w$SUVA = w
+
  #### use complete makes it so ignores NA
 cor(done$Ammonia, done$Nitrate, use = "complete")
 cor(done$Ammonia, done$FI, use = "complete")
