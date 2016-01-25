@@ -51,9 +51,17 @@ dev.off()
 
 plot(done$Ammonia, done$NPOC)
 plot(done$Nitrate, done$NPOC)
-done$Nitrate[done$Nitrate > 1.5 ] <- "NA"
 
-plot(done$Phosphorus, done$NPOC)
+write.csv(done, "done.csv")
+done$Nitrate[done$Nitrate > 1.5 ] <- "NA"
+done$Phosphorus[done$Phosphorus > 1.5 ] <- "NA"
+
+cor.test(done$TDN, done$NPOC, use = "complete")
+cor.test(done$DON, done$NPOC, use = "complete")
+
+plot(done$TN, done$NPOC)
+plot(done$DON, done$NPOC)
+plot(done$DON, done$Ammonia)
 
 plot(done$Ammonia, done$FI)
 plot(done$Nitrate, done$FI)
